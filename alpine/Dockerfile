@@ -1,3 +1,8 @@
+FROM docker:17.06.1-ce as static-docker-source
+# the `docker` repository on dockerhub provides a source of prebuild static binaries.
+# These may conveniently be referenced in a multi-stage build to copy over the
+# static docker binary without taking on any additional files.
+
 FROM alpine:3.5
 ENV CLOUD_SDK_VERSION 168.0.0
 
@@ -17,4 +22,5 @@ RUN apk --no-cache add \
     gcloud config set core/disable_usage_reporting true && \
     gcloud config set component_manager/disable_update_check true && \
     gcloud config set metrics/environment github_docker_image
+COPY --from=static-docker-source /usr/local/bin/docker /usr/local/bin/docker
 VOLUME ["/root/.config"]
