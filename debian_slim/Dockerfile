@@ -19,5 +19,6 @@ RUN apt-get update -qqy && apt-get install -qqy \
     apt-get update && apt-get install -y google-cloud-sdk=${CLOUD_SDK_VERSION}-0 $INSTALL_COMPONENTS && \
     gcloud config set core/disable_usage_reporting true && \
     gcloud config set component_manager/disable_update_check true && \
-    gcloud config set metrics/environment github_docker_image
+    gcloud config set metrics/environment github_docker_image && \
+    CLOUDSDK_COMPONENT_MANAGER_DISABLE_UPDATE_CHECK=true gcloud --version
 VOLUME ["/root/.config"]

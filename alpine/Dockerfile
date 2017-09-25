@@ -16,5 +16,6 @@ RUN apk --no-cache add \
     ln -s /lib /lib64 && \
     gcloud config set core/disable_usage_reporting true && \
     gcloud config set component_manager/disable_update_check true && \
-    gcloud config set metrics/environment github_docker_image
+    gcloud config set metrics/environment github_docker_image && \
+    CLOUDSDK_COMPONENT_MANAGER_DISABLE_UPDATE_CHECK=true gcloud --version
 VOLUME ["/root/.config"]
